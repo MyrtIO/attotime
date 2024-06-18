@@ -1,12 +1,12 @@
 {
-  "name": "PicoTime",
+  "name": "attotime",
   "version": "1.0.0",
   "description": "Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework)",
   "keywords": "timing",
   "repository":
   {
     "type": "git",
-    "url": "https://github.com/username/hello-world.git"
+    "url": "https://github.com/MyrtIO/attotime.git"
   },
   "authors":
   [
