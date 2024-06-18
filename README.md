@@ -42,3 +42,38 @@ void setup() {
 void loop() {
   Serial.printf("Stopwatch time: %d\n", stopwatch.split());
 }
+```
+
+### Progress
+
+Progress allows you to get the percentage of time completion as a `uint8_t` value. Convenient for programming animations.
+
+```cpp
+#include <attotime.h>
+#include <FastLED.h>
+
+Progress progress;
+
+void setup() {
+  Serial.begin(115200);
+  FastLED.addLeds<NEOPIXEL, PIN_LEDS>(leds, 0);
+  FastLED.setBrightness(0);
+  FastLED.show();
+  // Set brightness from 0 to 255 in 2 seconds
+  progress.start(2000);
+}
+
+void loop() {
+  FastLED.delay(20);
+  FastLED.setBrightness(progress.get());
+  FastLED.show();
+}
+```
+
+## Development
+
+Some scripts are available for development in the Makefile:
+
+- `test` — Runs the unit tests.
+- `format` — Formats C/C++ source code.
+- `configure` — Initializes the PIO environment.
