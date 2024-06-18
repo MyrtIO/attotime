@@ -1,5 +1,5 @@
 #include <unity.h>
-#include <PicoTime.h>
+#include <attotime.h>
 
 void test_TimerShouldReportFinish(void) {
   Timer timer;

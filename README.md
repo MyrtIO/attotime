@@ -1,4 +1,4 @@
-# PicoTime
+# Attotime
 
 Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework).
 
@@ -9,9 +9,9 @@ Ultra-compact library for working with timings on Arduino (or other boards with 
 Timer is the simplest class that allows you to set a time interval and determine if it has passed.
 
 ```cpp
-#include <PicoTime.h>
+#include <attotime.h>
 
-PicoTime timer;
+Timer timer;
 
 void setup() {
   Serial.begin(115200);
@@ -30,9 +30,9 @@ void loop() {
 Stopwatch allows you to measure how much time has passed since it was started.
 
 ```cpp
-#include <PicoTime.h>
+#include <attotime.h>
 
-PicoTime stopwatch;
+Stopwatch stopwatch;
 
 void setup() {
   Serial.begin(115200);

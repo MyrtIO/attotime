@@ -1,4 +1,3 @@
-// Copyright 2024 Mikhael Khrustik
 #pragma once
 
 #include <Arduino.h>
