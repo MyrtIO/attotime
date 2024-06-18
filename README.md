@@ -1,4 +1,4 @@
-# Attotime
+# ⏰ Attotime [![Quality Assurance](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml/badge.svg)](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml)
 
 Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework).
 
