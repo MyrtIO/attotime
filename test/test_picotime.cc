@@ -1,5 +1,5 @@
 #include <unity.h>
-#include <attotime.h>
+#include <Attotime.h>
 
 void test_TimerShouldReportFinish(void) {
   Timer timer;

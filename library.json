@@ -1,5 +1,5 @@
 {
-  "name": "attotime",
+  "name": "Attotime",
   "version": "1.0.0",
   "description": "Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework)",
   "keywords": "timing",
