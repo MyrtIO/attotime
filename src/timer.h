@@ -11,7 +11,7 @@ public:
    * Returns true if the timer has finished.
    */
   bool finished() {
-    return millis() >= _end;
+    return millis() >= end_;
   }
 
   /**
@@ -19,9 +19,9 @@ public:
    * @param ms The duration of the timer in milliseconds.
    */
   void start(size_t ms) {
-    _end = millis() + ms;
+    end_ = millis() + ms;
   }
 
 private:
-  uint32_t _end = 0;
+  uint32_t end_ = 0;
 };
