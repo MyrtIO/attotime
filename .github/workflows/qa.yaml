@@ -19,11 +19,6 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
-      # - name: Install QEMU for AVR
-      #   run: |
-      #     sudo apt install qemu-system-avr -y
-      #     qemu-system-avr -machine help
-
-      - name: Build unit testing firmware
-        run: pio test --without-uploading --without-testing -e uno
+      - name: Run unit tests
+        run: pio test -e native
 

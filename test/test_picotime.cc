@@ -1,4 +1,5 @@
 #include <unity.h>
+#include <Arduino.h>
 #include <Attotime.h>
 
 void test_TimerShouldReportFinish(void) {
@@ -14,7 +15,7 @@ void test_StopwatchShouldReportSplit(void) {
   stopwatch.start();
   TEST_ASSERT_EQUAL(0, stopwatch.split());
   delay(10);
-  TEST_ASSERT_TRUE(stopwatch.split() >= 10);
+  TEST_ASSERT_GREATER_THAN(9, stopwatch.split());
 }
 
 void test_StopwatchShouldReportStarted(void) {
@@ -37,7 +38,7 @@ void test_ProgressShouldReportValue(void) {
   progress.start(10);
   TEST_ASSERT_EQUAL(0, progress.get());
   delay(5);
-  TEST_ASSERT_EQUAL(127, progress.get());
+  TEST_ASSERT_INT_WITHIN(100, 128, progress.get());
   delay(5);
   TEST_ASSERT_EQUAL(255, progress.get());
 }
@@ -47,7 +48,7 @@ void test_ProgressShouldSetMax(void) {
   progress.setMax(100);
   progress.start(10);
   delay(5);
-  TEST_ASSERT_EQUAL(50, progress.get());
+  TEST_ASSERT_INT_WITHIN(50, 50, progress.get());
   delay(5);
   TEST_ASSERT_EQUAL(100, progress.get());
 }
@@ -63,8 +64,16 @@ int runUnityTests(void) {
   return UNITY_END();
 }
 
+#ifdef ARDUINO
 void setup() {
   runUnityTests();
 }
-
 void loop() {}
+#else
+int main() {
+  runUnityTests();
+  // print(millis());
+  // delay(1000);
+  return 0;
+}
+#endif

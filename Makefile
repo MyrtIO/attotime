@@ -4,8 +4,12 @@ configure:
 
 .PHONY: format
 format:
-	find test/ src/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
+	find test/ src/ lib/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
 
 .PHONY: test
 test:
+	pio test -e native
+
+.PHONY: test-avr
+test-avr:
 	pio test --without-uploading -e uno
