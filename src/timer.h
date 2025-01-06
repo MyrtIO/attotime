@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 /**
- * Represents a timer
+ * Timer is a class that allows you to set a time interval and determine if it has passed.
  */
 class Timer {
 public:

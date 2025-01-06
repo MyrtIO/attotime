@@ -2,5 +2,4 @@
 
 void testProgress();
 void testTimer();
-// void testDeque();
-// void testVector();
+void testStopwatch();

@@ -6,10 +6,16 @@ configure:
 format:
 	find test/ src/ lib/ -iname '*.h' -o -iname '*.cpp' | xargs clang-format -i
 
-.PHONY: test
-test:
+.PHONY: test-uno
+test-uno:
+	pio test -vvv -e uno --without-uploading
+
+.PHONY: test-native
+test-native:
 	pio test -e native
 
-.PHONY: test-avr
-test-avr:
-	pio test --without-uploading -e uno
+.PHONY: test
+test:
+	make test-native
+	make test-uno
+

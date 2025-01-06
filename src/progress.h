@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 /**
- * Represents a progress timer.
+ * Progress is a class that reports the progress of a time interval.
  */
 class Progress {
 public:
