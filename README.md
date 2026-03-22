@@ -78,7 +78,7 @@ void loop() {
 }
 ```
 
-## Overflow safety
+### Overflow safety
 
 All time comparisons use elapsed-time arithmetic (`now - start >= duration`)
 which handles `uint32_t` wrap-around correctly. Timers, stopwatches and
@@ -91,4 +91,3 @@ Available Makefile targets:
 
 - `test` — Run the unit tests (native).
 - `format` — Format C source code.
-- `configure` — Initialize the PIO environment.
