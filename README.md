@@ -1,79 +1,94 @@
-# ⏰ Attotime [![Quality Assurance](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml/badge.svg)](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml)
+# Attotime [![Quality Assurance](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml/badge.svg)](https://github.com/MyrtIO/attotime/actions/workflows/qa.yaml)
 
-Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework).
+Ultra-compact C library for working with timings. Framework-agnostic and overflow-safe.
+
+## Setup
+
+The library requires a clock source — a function that returns current time in
+milliseconds as `uint32_t`. Call `atto_init` once at startup:
+
+```c
+#include <attotime.h>
+
+// Arduino
+void setup() {
+    atto_init(millis);
+}
+
+// Or any custom clock
+uint32_t my_clock(void) { /* ... */ }
+atto_init(my_clock);
+```
 
 ## Usage
 
 ### Timer
 
-Timer is the simplest class that allows you to set a time interval and determine if it has passed.
+A simple countdown timer that reports whether a given interval has passed.
 
-```cpp
-#include <attotime.h>
-
-Timer timer;
+```c
+atto_timer_t timer = ATTO_TIMER_INIT;
 
 void setup() {
-  Serial.begin(115200);
-  timer.start(1000);
+    atto_init(millis);
+    atto_timer_start(&timer, 1000);
 }
 
 void loop() {
-  if (timer.isExpired()) {
-    Serial.println("Timer expired!");
-  }
+    if (atto_timer_finished(&timer)) {
+        // 1 second has passed
+    }
 }
 ```
 
 ### Stopwatch
 
-Stopwatch allows you to measure how much time has passed since it was started.
+Measures how much time has passed since it was started.
 
-```cpp
-#include <attotime.h>
-
-Stopwatch stopwatch;
+```c
+atto_stopwatch_t sw = ATTO_STOPWATCH_INIT;
 
 void setup() {
-  Serial.begin(115200);
-  stopwatch.start();
+    atto_init(millis);
+    atto_stopwatch_start(&sw);
 }
 
 void loop() {
-  Serial.printf("Stopwatch time: %d\n", stopwatch.split());
+    uint32_t elapsed = atto_stopwatch_split(&sw);
 }
 ```
 
 ### Progress
 
-Progress allows you to get the percentage of time completion as a `uint8_t` value. Convenient for programming animations.
+Reports the completion of a time interval as a `uint8_t` value (0–255 by
+default). Convenient for programming animations.
 
-```cpp
-#include <attotime.h>
-#include <FastLED.h>
-
-Progress progress;
+```c
+atto_progress_t progress = ATTO_PROGRESS_INIT;
 
 void setup() {
-  Serial.begin(115200);
-  FastLED.addLeds<NEOPIXEL, PIN_LEDS>(leds, 0);
-  FastLED.setBrightness(0);
-  FastLED.show();
-  // Set brightness from 0 to 255 in 2 seconds
-  progress.start(2000);
+    atto_init(millis);
+    // Ramp from 0 to 255 over 2 seconds
+    atto_progress_start(&progress, 2000);
 }
 
 void loop() {
-  FastLED.delay(20);
-  FastLED.setBrightness(progress.get());
-  FastLED.show();
+    uint8_t brightness = atto_progress_get(&progress);
+    // use brightness to drive LEDs, etc.
 }
 ```
 
+## Overflow safety
+
+All time comparisons use elapsed-time arithmetic (`now - start >= duration`)
+which handles `uint32_t` wrap-around correctly. Timers, stopwatches and
+progress instances keep working across the ~49.7-day `millis()` overflow
+boundary.
+
 ## Development
 
-Some scripts are available for development in the Makefile:
+Available Makefile targets:
 
-- `test` — Runs the unit tests.
-- `format` — Formats C/C++ source code.
-- `configure` — Initializes the PIO environment.
+- `test` — Run the unit tests (native).
+- `format` — Format C source code.
+- `configure` — Initialize the PIO environment.

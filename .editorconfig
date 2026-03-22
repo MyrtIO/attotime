@@ -6,12 +6,11 @@ root = true
 insert_final_newline = true
 charset = utf-8
 trim_trailing_whitespace = true
-indent_style = tab
-indent_size = 4
+indent_style = space
+indent_size = 2
 
-[*.md,*.mdx]
+[*.md]
 indent_size = 4
-trim_trailing_whitespace = true
 
 [Makefile]
 indent_style = tab

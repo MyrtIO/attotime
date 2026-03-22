@@ -1,7 +1,7 @@
 {
   "name": "attotime",
-  "version": "1.0.1",
-  "description": "Ultra-compact library for working with timings on Arduino (or other boards with Arduino framework)",
+  "version": "2.0.0",
+  "description": "Ultra-compact C library for working with timings. Framework-agnostic, overflow-safe.",
   "keywords": "timing",
   "repository":
   {
@@ -17,6 +17,5 @@
     }
   ],
   "license": "MIT",
-  "frameworks": "Arduino",
   "platforms": "*"
 }
